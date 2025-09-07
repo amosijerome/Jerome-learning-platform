@@ -6,103 +6,149 @@
 <title>Jerome Learning Platform</title>
 <style>
 /* --- General Styles --- */
-body{
-    font-family:'Segoe UI',sans-serif;
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Prevent full-page scrolling */
+    font-family: 'Segoe UI', sans-serif;
     background: linear-gradient(to right, #8e2de2, #4a00e0);
-    margin:0; padding:0;
-    color:#333;
+    color: #333;
 }
-header{
+
+/* Header */
+header {
     background: rgba(255,255,255,0.1);
-    color:white; text-align:center; padding:30px 20px;
+    color: white;
+    text-align: center;
+    padding: 20px;
     backdrop-filter: blur(10px);
 }
-h1{margin:0; font-size:2.5em;}
-.container{
-    max-width:900px; margin:30px auto; padding:20px;
+h1 { margin: 0; font-size: 2em; }
+
+/* Container that fits screen */
+.container {
+    height: calc(100vh - 80px); /* Fit below header */
+    max-width: 900px;
+    margin: auto;
+    padding: 15px;
+    overflow-y: auto; /* Scroll only inside */
 }
-.box{
-    background:white; padding:25px; margin-bottom:25px;
-    border-radius:15px; box-shadow:0 8px 20px rgba(0,0,0,0.2);
+
+/* Content Boxes */
+.box {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
-input,textarea,button{
-    width:100%; padding:12px; margin:10px 0;
-    border-radius:10px; border:1px solid #ccc;
-    font-size:1em;
+
+input, textarea, button {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 1em;
 }
-button{
-    background: #4a00e0; color:white; border:none;
-    cursor:pointer; font-weight:bold;
-    transition:0.3s;
+
+button {
+    background: #4a00e0;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
 }
-button:hover{background:#6a00f0;}
-.collapsible{
-    background:#4a00e0; color:white; padding:15px;
-    text-align:center; cursor:pointer; border-radius:10px;
-    font-weight:bold; margin-bottom:10px;
+button:hover { background: #6a00f0; }
+
+.collapsible {
+    background: #4a00e0;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10px;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
-.content{display:none; padding-top:15px;}
-a{color:#4a00e0; text-decoration:none; margin-right:10px; font-weight:bold;}
-.social-icons img{width:45px; margin:5px; cursor:pointer; border-radius:10px; transition:0.3s;}
-.social-icons img:hover{transform:scale(1.1);}
-#answer{background:#f4f4f4; padding:12px; border-radius:10px; margin-top:10px;}
+.content { display: none; padding-top: 15px; }
+
+a { color: #4a00e0; text-decoration: none; font-weight: bold; margin-right: 10px; }
+
+.social-icons img {
+    width: 45px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+.social-icons img:hover { transform: scale(1.1); }
+
+#answer {
+    background: #f4f4f4;
+    padding: 12px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
 </style>
 </head>
 <body>
 
 <header>
-<h1>📘 Jerome Learning Platform</h1>
-<p id="welcomeMsg"></p>
+  <h1>📘 Jerome Learning Platform</h1>
+  <p id="welcomeMsg"></p>
 </header>
 
 <div class="container">
 
-<!-- Login/Register Forms -->
-<div class="box">
-<div class="collapsible" onclick="toggleForm('loginBox')">🔑 Login</div>
-<div class="content" id="loginBox">
-<input id="email" placeholder="Email">
-<input id="password" type="password" placeholder="Password">
-<button onclick="login()">Login</button>
-</div>
-</div>
+  <!-- Login/Register Forms -->
+  <div class="box">
+    <div class="collapsible" onclick="toggleForm('loginBox')">🔑 Login</div>
+    <div class="content" id="loginBox">
+      <input id="email" placeholder="Email">
+      <input id="password" type="password" placeholder="Password">
+      <button onclick="login()">Login</button>
+    </div>
+  </div>
 
-<div class="box">
-<div class="collapsible" onclick="toggleForm('registerBox')">📝 Register</div>
-<div class="content" id="registerBox">
-<input id="name" placeholder="Full Name">
-<input id="regEmail" placeholder="Email">
-<input id="regPass" type="password" placeholder="Password">
-<button onclick="register()">Register</button>
-</div>
-</div>
+  <div class="box">
+    <div class="collapsible" onclick="toggleForm('registerBox')">📝 Register</div>
+    <div class="content" id="registerBox">
+      <input id="name" placeholder="Full Name">
+      <input id="regEmail" placeholder="Email">
+      <input id="regPass" type="password" placeholder="Password">
+      <button onclick="register()">Register</button>
+    </div>
+  </div>
 
-<!-- Add Learning Material -->
-<div class="box">
-<h2>📂 Add Learning Material</h2>
-<input id="title" placeholder="Material Title">
-<textarea id="desc" placeholder="Description"></textarea>
-<button onclick="addMaterial()">Add Material</button>
-</div>
+  <!-- Add Learning Material -->
+  <div class="box">
+    <h2>📂 Add Learning Material</h2>
+    <input id="title" placeholder="Material Title">
+    <textarea id="desc" placeholder="Description"></textarea>
+    <button onclick="addMaterial()">Add Material</button>
+  </div>
 
-<!-- Ask AI -->
-<div class="box">
-<h2>🤖 Ask a Question</h2>
-<textarea id="question" placeholder="Ask anything..."></textarea>
-<button onclick="askAI()">Ask</button>
-<div id="answer"></div>
-</div>
+  <!-- Ask AI -->
+  <div class="box">
+    <h2>🤖 Ask a Question</h2>
+    <textarea id="question" placeholder="Ask anything..."></textarea>
+    <button onclick="askAI()">Ask</button>
+    <div id="answer"></div>
+  </div>
 
-<!-- Social Media -->
-<div class="box">
-<h2>🌐 Connect with us</h2>
-<div class="social-icons">
-<a href="https://facebook.com" target="_blank"><img src="facebook.png" alt="Facebook"></a>
-<a href="https://twitter.com" target="_blank"><img src="twitter.png" alt="Twitter"></a>
-<a href="https://instagram.com" target="_blank"><img src="instagram.png" alt="Instagram"></a>
-<a href="https://tiktok.com" target="_blank"><img src="tiktok.png" alt="TikTok"></a>
-</div>
-</div>
+  <!-- Social Media -->
+  <div class="box">
+    <h2>🌐 Connect with us</h2>
+    <div class="social-icons">
+      <a href="https://facebook.com" target="_blank"><img src="facebook.png" alt="Facebook"></a>
+      <a href="https://twitter.com" target="_blank"><img src="twitter.png" alt="Twitter"></a>
+      <a href="https://instagram.com" target="_blank"><img src="instagram.png" alt="Instagram"></a>
+      <a href="https://tiktok.com" target="_blank"><img src="tiktok.png" alt="TikTok"></a>
+    </div>
+  </div>
 
 </div>
 
